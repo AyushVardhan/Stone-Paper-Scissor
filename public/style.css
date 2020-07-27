@@ -12,14 +12,15 @@ section{
 
 .score{
     color: #000000;
-    height: 20vh;
-    display: flex;
+    /* height: 20vh; */
+    /* display: flex; */
     justify-content: space-around;
-    align-items: center;
+    /* align-items: center; */
 }
 
 .score h2{
-    font-size: 30px;
+    font-size: 35px;
+    text-align: center;
 }
 
 .score p{
@@ -66,7 +67,13 @@ section{
     font-size: 35px;
 }
 
-.hands, .options{
+/* .hands {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+} */
+
+.options{
     display: flex;
     justify-content: space-around;
     align-items: center;
