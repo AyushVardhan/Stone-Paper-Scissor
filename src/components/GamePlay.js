@@ -18,17 +18,7 @@ const ScoreBoard = (props) => {
     );
 };
 
-const PlayGameSection = () => {
-
-    let pScore = 0;
-    let cScore = 0;
-
-    const updateScore = () => {
-        const playerScore = document.querySelector('.player-score p');
-        const computerScore = document.querySelector('.computer-score p');
-        playerScore.textContent = pScore;
-        computerScore.textContent = cScore;
-    };
+const PlayGameSection = (props) => {
 
     const compareHands = (playerChoice, computerChoice) => {
 
@@ -41,37 +31,31 @@ const PlayGameSection = () => {
         if(playerChoice === 'rock'){
           if(computerChoice === 'scissors'){
             winner.textContent = 'Player Wins!';
-            pScore++;
+            props.updatePlayer();
           }else{
             winner.textContent = 'Computer Wins!';
-            cScore++;
+            props.updateComputer();
           }
-          updateScore();
-          return;
         }
     
         if(playerChoice === 'paper'){
           if(computerChoice === 'scissors'){
             winner.textContent = 'Computer Wins!';
-            cScore++;
+            props.updateComputer();
           }else{
             winner.textContent = 'Player Wins!';
-            pScore++;
+            props.updatePlayer();
           }
-          updateScore();
-          return;
         }
     
         if(playerChoice === 'scissors'){
           if(computerChoice === 'rock'){
             winner.textContent = 'Computer Wins!';
-            cScore++;
+            props.updateComputer();
           }else{
             winner.textContent = 'Player Wins!';
-            pScore++;
+            props.updatePlayer();
           }
-          updateScore();
-          return;
         }
     }
 
@@ -183,12 +167,24 @@ const MatchIntroSection = () => {
 const GamePlay = () => {
 
     const[playerScore, setPlayerScore] = useState(0);
+
+    const incrementPlayerScore = () => {
+        setPlayerScore(playerScore => playerScore+1);
+        console.log("player score update done" + playerScore);  // Investigate why not updating?
+    };
+
     const[computerScore, setComputerScore] = useState(0);
+
+    const incrementComputerScore = () => {
+        setComputerScore(computerScore => computerScore+1);
+        console.log("computer score update done" + computerScore); // Investigate why not updating?
+    };
 
     return (
         <section className="game">
             <ScoreBoard playerRank={playerScore} computerRank={computerScore}/>
-            <PlayGameSection/>
+
+            <PlayGameSection updatePlayer={incrementPlayerScore} updateComputer={incrementComputerScore}/>
 
             <div className="match fadeOut">
                 <MatchIntroSection/>
