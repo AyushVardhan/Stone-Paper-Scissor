@@ -1,7 +1,25 @@
 import React from 'react';
 import { Row, Col } from 'react-bootstrap';
 
-const GamePlay = () => {
+
+const ScoreBoard = () => {
+    return (
+        <Row className="score">
+            <Col className="player-score mt-3">
+                <h2>Player</h2>
+                <p>0</p>
+            </Col>
+
+            <Col className="computer-score mt-3">
+                <h2>Computer</h2>
+                <p>0</p>
+            </Col>
+        </Row>
+    );
+};
+
+const PlayGameSection = () => {
+
     let pScore = 0;
     let cScore = 0;
 
@@ -105,56 +123,76 @@ const GamePlay = () => {
     };
 
     return (
-        <section className="game">
-            <Row className="score">
-                <Col className="player-score mt-3">
-                    <h2>Player</h2>
-                    <p>0</p>
-                </Col>
+        <div className="intro">
+            <h1>Stone Paper and Scissor Game</h1>
+            <button onClick={letsPlayOnClick}>let's play</button>
+        </div>
+    );
+};
 
-                <Col className="computer-score mt-3">
-                    <h2>Computer</h2>
-                    <p>0</p>
-                </Col>
+
+const ComputerHandSection = () => {
+    return(
+        <Col className="mr-5">                       
+            <Row className="justify-content-center">
+                <img className="computer-hand" style={{float:"right",width:"200px", height:"200px"}} src="./img/rock.png" alt=""/>
+            </Row>   
+            <div className="container">
+                <Row className="options-pc mt-5 justify-content-end">
+                    <button className="rock mr-1" style={{background:"#838383", cursor:"default"}}>rock</button>
+                    <button className="paper mr-1" style={{background:"#838383", cursor:"default"}}>paper</button>
+                    <button className="scissors" style={{background:"#838383", cursor:"default"}}>scissors</button>
+                </Row>                            
+            </div>                                      
+        </Col>        
+    );
+};
+
+const PlayerHandSection = () => {
+    return(
+        <Col className="ml-5">
+            <Row className="justify-content-center">
+                <img className="player-hand" style={{width:"200px", height:"200px"}} src="./img/rock.png" alt=""/>
+            </Row>
+            <div className="container">
+                <Row className="options mt-5 justify-content-start">
+                    <button className="rock mr-1">rock</button>
+                    <button className="paper mr-1">paper</button>
+                    <button className="scissors">scissors</button>
+                </Row>                            
+            </div>
+        </Col>        
+    );
+};
+
+const MatchIntroSection = () => {
+    return(
+        <>
+            <Row className="justify-content-center">
+                <h2 className="winner">Choose your options from left</h2>
             </Row>
 
-            <div className="intro">
-                <h1>Stone Paper and Scissor Game</h1>
-                <button onClick={letsPlayOnClick}>let's play</button>
-            </div>
+            <Row className="justify-content-center">
+                <p style={{color:"#838383"}}>Computer options are disabled. No hack please :)</p>
+            </Row>  
+
+        </>
+    );
+};
+
+const GamePlay = () => {
+
+    return (
+        <section className="game">
+            <ScoreBoard/>
+            <PlayGameSection/>
 
             <div className="match fadeOut">
-                <Row className="justify-content-center">
-                    <h2 className="winner">Choose your options from left</h2>
-                </Row>
-                <Row className="justify-content-center">
-                    <p style={{color:"#838383"}}>Computer options are disabled. No hack please :)</p>
-                </Row>
+                <MatchIntroSection/>
+
                 <Row className="hands mt-5">
-                    <Col className="ml-5">
-                        <Row className="justify-content-center">
-                            <img className="player-hand" style={{width:"200px", height:"200px"}} src="./img/rock.png" alt=""/>
-                        </Row>
-                        <div className="container">
-                            <Row className="options mt-5 justify-content-start">
-                                <button className="rock mr-1">rock</button>
-                                <button className="paper mr-1">paper</button>
-                                <button className="scissors">scissors</button>
-                            </Row>                            
-                        </div>
-                    </Col>
-                    <Col className="mr-5">                       
-                        <Row className="justify-content-center">
-                            <img className="computer-hand" style={{float:"right",width:"200px", height:"200px"}} src="./img/rock.png" alt=""/>
-                        </Row>   
-                        <div className="container">
-                            <Row className="options-pc mt-5 justify-content-end">
-                                <button className="rock mr-1" style={{background:"#838383", cursor:"default"}}>rock</button>
-                                <button className="paper mr-1" style={{background:"#838383", cursor:"default"}}>paper</button>
-                                <button className="scissors" style={{background:"#838383", cursor:"default"}}>scissors</button>
-                            </Row>                            
-                        </div>                                      
-                    </Col>
+                    <PlayerHandSection/>
+                    <ComputerHandSection/>
                 </Row>
             </div>
         </section>
