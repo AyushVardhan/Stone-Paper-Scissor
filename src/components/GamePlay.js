@@ -1,18 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Row, Col } from 'react-bootstrap';
 
 
-const ScoreBoard = () => {
+const ScoreBoard = (props) => {
     return (
         <Row className="score">
             <Col className="player-score mt-3">
                 <h2>Player</h2>
-                <p>0</p>
+                <p>{props.playerRank}</p>
             </Col>
 
             <Col className="computer-score mt-3">
                 <h2>Computer</h2>
-                <p>0</p>
+                <p>{props.computerRank}</p>
             </Col>
         </Row>
     );
@@ -182,9 +182,12 @@ const MatchIntroSection = () => {
 
 const GamePlay = () => {
 
+    const[playerScore, setPlayerScore] = useState(0);
+    const[computerScore, setComputerScore] = useState(0);
+
     return (
         <section className="game">
-            <ScoreBoard/>
+            <ScoreBoard playerRank={playerScore} computerRank={computerScore}/>
             <PlayGameSection/>
 
             <div className="match fadeOut">
