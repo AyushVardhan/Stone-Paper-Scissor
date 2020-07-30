@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Row, Col } from 'react-bootstrap';
 
 
@@ -170,16 +170,18 @@ const GamePlay = () => {
 
     const incrementPlayerScore = () => {
         setPlayerScore(playerScore => playerScore+1);
-        console.log("player score update done" + playerScore);  // Investigate why not updating?
     };
+
+    useEffect(() => {console.log("player score update done" + playerScore)});
 
     const[computerScore, setComputerScore] = useState(0);
 
     const incrementComputerScore = () => {
         setComputerScore(computerScore => computerScore+1);
-        console.log("computer score update done" + computerScore); // Investigate why not updating?
     };
 
+    useEffect(() => {console.log("computer score update done" + computerScore)});
+    
     return (
         <section className="game">
             <ScoreBoard playerRank={playerScore} computerRank={computerScore}/>
