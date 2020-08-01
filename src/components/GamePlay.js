@@ -2,6 +2,32 @@ import React, { useState, useEffect } from 'react';
 import ScoreBoard from '../components/segments/ScoreBoard';
 import PrepareMatchSection from '../components/segments/PrepareMatchSection';
 
+const GamePlay = () => {
+
+    const[playerScore, setPlayerScore] = useState(0);
+    useEffect(() => {console.log("player score update done" + playerScore)});
+
+    const[computerScore, setComputerScore] = useState(0);
+    useEffect(() => {console.log("computer score update done" + computerScore)});
+
+    const refresh = () => {
+        setPlayerScore(playerScore => playerScore = 0);
+        setComputerScore(computerScore => computerScore = 0);
+    };
+    
+    return (
+        <section className="game">
+            <ScoreBoard playerRank={playerScore} computerRank={computerScore}/>
+
+            <PlayGameSection updatePlayer={() => setPlayerScore(playerScore => playerScore+1)} 
+                             updateComputer={() => setComputerScore(computerScore => computerScore+1)}
+            />
+
+            <PrepareMatchSection refreshGame={refresh}/>
+        </section>
+    );
+};
+
 const PlayGameSection = (props) => {
     const letsPlayOnClick = () =>{
         const introScreen = document.querySelector('.intro');
@@ -95,26 +121,5 @@ const playGame = (props) => {
         });
     });        
 }
-
-const GamePlay = () => {
-
-    const[playerScore, setPlayerScore] = useState(0);
-    useEffect(() => {console.log("player score update done" + playerScore)});
-
-    const[computerScore, setComputerScore] = useState(0);
-    useEffect(() => {console.log("computer score update done" + computerScore)});
-    
-    return (
-        <section className="game">
-            <ScoreBoard playerRank={playerScore} computerRank={computerScore}/>
-
-            <PlayGameSection updatePlayer={() => setPlayerScore(playerScore => playerScore+1)} 
-                             updateComputer={() => setComputerScore(computerScore => computerScore+1)}
-            />
-
-            <PrepareMatchSection/>
-        </section>
-    );
-};
 
 export default GamePlay;
